@@ -10,7 +10,7 @@ const productSchema = {
 
 async function loadProducts() {
     try {
-        const data = await fs.readFile(path.join(__dirname, 'products.json'), 'utf8');
+        const data = await fs.readFile(path.join(__dirname, '../products.json'), 'utf8');
         return JSON.parse(data);
     } catch (error) {
         console.error('Error loading products:', error);
