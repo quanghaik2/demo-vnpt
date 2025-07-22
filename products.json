@@ -1,0 +1,107 @@
+[
+    {
+        "id": 1,
+        "name": "Internet Cáp Quang 100Mbps",
+        "description": "Gói cáp quang tốc độ cao cho gia đình",
+        "price": 200000,
+        "category": "internet"
+    },
+    {
+        "id": 2,
+        "name": "Internet Cáp Quang 200Mbps",
+        "description": "Gói cáp quang tốc độ cao cho doanh nghiệp nhỏ",
+        "price": 350000,
+        "category": "internet"
+    },
+    {
+        "id": 3,
+        "name": "Gói Combo Internet + Truyền Hình",
+        "description": "Combo internet 100Mbps và truyền hình 180 kênh",
+        "price": 280000,
+        "category": "combo"
+    },
+    {
+        "id": 4,
+        "name": "Dịch Vụ VNPT Pay",
+        "description": "Ví điện tử thanh toán tiện lợi",
+        "price": 0,
+        "category": "service"
+    },
+    {
+        "id": 5,
+        "name": "Gói Cước Di Động 4G 1GB/ngày",
+        "description": "Gói cước di động 4G tốc độ cao",
+        "price": 120000,
+        "category": "mobile"
+    },
+    {
+        "id": 6,
+        "name": "Gói Cước Di Động 2GB/ngày",
+        "description": "Gói cước di động 4G dung lượng lớn",
+        "price": 150000,
+        "category": "mobile"
+    },
+    {
+        "id": 7,
+        "name": "Truyền Hình MyTV Standard",
+        "description": "Gói truyền hình cơ bản với 150 kênh",
+        "price": 90000,
+        "category": "tv"
+    },
+    {
+        "id": 8,
+        "name": "Truyền Hình MyTV Advanced",
+        "description": "Gói truyền hình nâng cao với 200 kênh",
+        "price": 140000,
+        "category": "tv"
+    },
+    {
+        "id": 9,
+        "name": "Internet Cáp Quang 300Mbps",
+        "description": "Gói cáp quang siêu tốc cho doanh nghiệp",
+        "price": 500000,
+        "category": "internet"
+    },
+    {
+        "id": 10,
+        "name": "Gói Combo Doanh Nghiệp",
+        "description": "Combo internet 200Mbps và di động 2GB/ngày",
+        "price": 450000,
+        "category": "combo"
+    },
+    {
+        "id": 11,
+        "name": "Dịch Vụ Cloud Server",
+        "description": "Dịch vụ lưu trữ đám mây cho doanh nghiệp",
+        "price": 1000000,
+        "category": "service"
+    },
+    {
+        "id": 12,
+        "name": "Hóa Đơn Điện Tử",
+        "description": "Dịch vụ hóa đơn điện tử tiện lợi",
+        "price": 5000,
+        "category": "service"
+    },
+    {
+        "id": 13,
+        "name": "Gói Cước Di Động 5GB/ngày",
+        "description": "Gói cước di động siêu dung lượng",
+        "price": 200000,
+        "category": "mobile"
+    },
+    {
+        "id": 14,
+        "name": "Internet Cáp Quang 50Mbps",
+        "description": "Gói cáp quang cơ bản cho cá nhân",
+        "price": 150000,
+        "category": "internet"
+    },
+    {
+        "id": 15,
+        "name": "Truyền Hình MyTV Premium",
+        "description": "Gói truyền hình cao cấp với nội dung độc quyền",
+        "price": 200000,
+        "category": "tv"
+    }
+]

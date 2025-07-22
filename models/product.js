@@ -1,11 +1,5 @@
-const mysql = require('mysql2/promise');
-
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'vnpt_db'
-});
+const fs = require('fs').promises;
+const path = require('path');
 
 const productSchema = {
     name: { type: 'VARCHAR(255)', required: true },
@@ -14,14 +8,22 @@ const productSchema = {
     category: { type: 'VARCHAR(100)', default: 'general' }
 };
 
+async function loadProducts() {
+    try {
+        const data = await fs.readFile(path.join(__dirname, 'products.json'), 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error loading products:', error);
+        return [];
+    }
+}
+
 module.exports = {
-    pool,
     getAllProducts: async () => {
-        const [rows] = await pool.query('SELECT * FROM products');
-        return rows;
+        return await loadProducts();
     },
     getProductById: async (id) => {
-        const [rows] = await pool.query('SELECT * FROM products WHERE id = ?', [id]);
-        return rows[0];
+        const products = await loadProducts();
+        return products.find(product => product.id === parseInt(id));
     }
 };

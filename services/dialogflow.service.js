@@ -1,9 +1,8 @@
-require('dotenv').config(); // Tải biến môi trường
+require('dotenv').config();
 
 const { GoogleGenerativeAI } = require('@google/generative-ai');
-const { pool } = require('../models/product'); // Nhập pool từ product.js
+const { getAllProducts } = require('../models/product');
 
-// Cấu hình môi trường
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
@@ -24,8 +23,8 @@ async function sendMessage(query, sessionId) {
             throw new Error('Thiếu GEMINI_API_KEY trong .env');
         }
 
-        // Truy vấn tất cả sản phẩm từ cơ sở dữ liệu
-        const [products] = await pool.query('SELECT * FROM products');
+        // Truy vấn tất cả sản phẩm từ file JSON
+        const products = await getAllProducts();
         const productList = products.map(product => ({
             name: product.name,
             price: product.price,
@@ -42,14 +41,10 @@ async function sendMessage(query, sessionId) {
         return natural_response || "Không tìm thấy. Gọi 0911261966!";
     } catch (error) {
         console.error('LỖI:', error);
-        if (error.code === 'ER_ACCESS_DENIED_ERROR') {
-            return 'Lỗi kết nối cơ sở dữ liệu.';
-        }
         return 'Lỗi, thử lại sau!';
     }
 }
 
-// Xuất hàm sendMessage
 module.exports = {
     sendMessage
 };
