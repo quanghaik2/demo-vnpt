@@ -115,12 +115,102 @@
     </main>
     
     <footer>
-        </footer>
+    </footer>
     
     <div class="chat-bubble">
-       </div>
+        <i class="fas fa-comment-alt"></i>
+    </div>
+    <div class="chat-window">
+        <div class="chat-header">
+            <h4>VNPT Yên Bái AI</h4>
+            <button class="close-chat">×</button>
+        </div>
+        <div class="chat-body">
+            <div class="chat-message ai-message">
+                Xin chào! Tôi là VNPT Yên Bái AI. Hôm nay tôi có thể giúp gì cho bạn?
+            </div>
+        </div>
+        <div class="chat-footer">
+            <form onsubmit="return false;">
+                <input type="text" placeholder="Nhập tin nhắn...">
+                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
     <script>
-      // Toàn bộ script giữ nguyên
+        // --- CÁC BIẾN DOM ELEMENT ---
+        const chatBubble = document.querySelector('.chat-bubble');
+        const chatWindow = document.querySelector('.chat-window');
+        const closeChat = document.querySelector('.close-chat');
+        const chatBody = document.querySelector('.chat-body');
+        const chatForm = document.querySelector('.chat-footer form');
+        const chatInput = document.querySelector('.chat-footer input');
+
+        // --- QUẢN LÝ PHIÊN CHAT (SESSION) ---
+        const sessionId = 'session-' + Date.now() + '-' + Math.random().toString(36).substring(2);
+
+        // --- XỬ LÝ GIAO DIỆN CHAT ---
+        chatBubble.addEventListener('click', () => {
+            const isHidden = chatWindow.style.display === 'none' || chatWindow.style.display === '';
+            chatWindow.style.display = isHidden ? 'flex' : 'none';
+            if (isHidden) {
+                chatInput.focus();
+            }
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWindow.style.display = 'none';
+        });
+
+        /**
+         * Hàm trợ giúp để thêm tin nhắn vào cửa sổ chat
+         * @param {string} text - Nội dung tin nhắn.
+         * @param {string} className - Lớp CSS ('user-message' hoặc 'ai-message').
+         */
+        function appendMessage(text, className) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', className);
+            messageElement.textContent = text;
+            chatBody.appendChild(messageElement);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // --- GỬI TIN NHẮN TỚI BACKEND ---
+        async function handleSendMessage(event) {
+            event.preventDefault(); 
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            appendMessage(message, 'user-message');
+            chatInput.value = '';
+
+            try {
+                const response = await fetch('/send-message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        sessionId: sessionId
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Lỗi HTTP! Trạng thái: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const aiReply = data.reply;
+                appendMessage(aiReply, 'ai-message');
+
+            } catch (error) {
+                console.error('Lỗi khi gửi tin nhắn:', error);
+                appendMessage('Đã có lỗi xảy ra khi kết nối tới chatbot. Vui lòng thử lại sau!', 'ai-message');
+            }
+        }
+
+        chatForm.addEventListener('submit', handleSendMessage);
     </script>
 </body>
 </html>
