@@ -57,6 +57,7 @@ process.on('SIGTERM', () => {
     });
 });
 
+
 app.listen(PORT, () => {
     console.log(`Server đang chạy trên cổng ${PORT} theo mô hình MVC`);
     console.log(`Truy cập http://localhost:${PORT}`);
